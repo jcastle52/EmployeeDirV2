@@ -4,6 +4,7 @@ export default router;
 
 import employees from "../db/employees.js";
 
+
 router
   .route("/")
   .get((req, res) => {
@@ -11,6 +12,10 @@ router
   })
   .post((req, res) => {
     const { name } = req.body;
+
+    if (req = undefined) {
+
+    }
 
     if (!name) {
       res.status(400).send("Name is invalid");
@@ -29,20 +34,24 @@ router
     }
   });
 
-  router.route("/random").get((req, res) => {
+router.route("/random").get((req, res) => {
+  let index;
   const randomIndex = Math.floor(Math.random() * employees.length);
-  res.send(employees[randomIndex]);
+
+  if (index != randomIndex) {
+    index = randomIndex;
+    res.send(employees[randomIndex]);
+  }
 });
 
-  router.route("/:id").get((req, res) => {
-    const { id } = req.params;
+router.route("/:id").get((req, res) => {
+  const { id } = req.params;
 
-    if (isNaN(id)) {
-        res.status(400).send("Id must be a number")
-    }  else if (id > employees.length) {
-        res.status(400).send("Id must be a number less than " + employees.length)
-    } else {
-        res.send(employees[id - 1])
-    }
-  });
-
+  if (isNaN(id)) {
+    res.status(404).send("Id must be a number");
+  } else if (id > employees.length) {
+    res.status(404).send("Id must be a number less than " + employees.length);
+  } else {
+    res.send(employees[id - 1]);
+  }
+});
