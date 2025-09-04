@@ -12,11 +12,7 @@ router
   })
   .post((req, res) => {
     const { name } = req.body;
-
-    if (req = undefined) {
-
-    }
-
+    
     if (!name) {
       res.status(400).send("Name is invalid");
     } else if (!isNaN(name)) {
